@@ -1,0 +1,214 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="https://devworkflow.waynebrothers.com/integrify/resources/css/compiled.css?0.1">
+  <link rel="stylesheet" type="text/css" href="https://devworkflow.waynebrothers.com/integrify/resources/css/ext-all.css">
+  <script src="https://devworkflow.waynebrothers.com/_JaiTech_CustomPlugins/js/Config.js"></script>
+  <script src="https://devworkflow.waynebrothers.com/_JaiTech_CustomPlugins/js/DropDown.js"></script>
+  <script src="https://devworkflow.waynebrothers.com/_JaiTech_CustomPlugins/js/formValidations/EquipmentValidation.js"></script>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+ 
+   <script src="https://jaitechsystems.github.io/js/onLoadDevFormEquipment.js"></script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://jaitechsystems.github.io/js/addDate.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://jaitechsystems.github.io/css/form-common-style-dev.css">
+  </head>
+<body>
+   <form action="#" method="post"> 
+<div class="container"> 
+  <table cellpadding="0" class="iForm" id="iForm" width="100%">
+  
+	<tbody>
+                  <div id="locationField">
+
+                    <input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text" autocomplete="on" style="width: 480px;"/>
+        </div>
+              
+                    <table >
+                        <tr>
+                          <td>
+                            <input class="field" id="street_number"disabled="true" type="hidden"/><input class="field" id="route" disabled="true" type="hidden"/>
+                            <div align="right">Address</div>
+                          </td>
+                          <td>
+                            <input id="Q4224_addr" maxlength="60" name="Q4224_addr" title="Maximum of 60 characters" type="text" />
+                          </td>
+                        </tr>
+                        <tr>
+                            <td >
+                              <input class="field" id="locality" disabled="true" type="hidden"/>
+                                <div  align="right" >City</div> 
+                            </td>
+                            <td>
+                                <input id="Q4224_city" maxlength="60" name="Q4224_city" title="Maximum of 60 characters" type="text" />
+                            </td>
+                        </tr> 
+                        <tr>
+                          <td align="right">
+                            <input class="field" id="administrative_area_level_1" disabled="true" type="hidden"/>
+                            <input class="field" id="postal_code" disabled="true" type="hidden"/>
+                
+                            <label>State</label>
+                          </td>
+                          <td>
+                            
+                         
+                            <input id="Q4224_state" maxlength="60" name="Q4224_state" style="margin:0;padding:0;" title="Maximum of 60 characters" type="text" >
+                          </td>
+                          <td align="right">
+                            <label>Zip</label>
+                          </td>
+                          <td>
+                            <input id="Q4224_zip" maxlength="60" name="Q4224_zip"  style="margin:0;padding:0;" title="Maximum of 60 characters" type="text" >
+                          </td>
+                        </tr>
+                    </table>
+                <input class="field" id="country" disabled="true" type="hidden"/>
+
+         	</div>
+              
+            
+         </td>
+        
+      </tr>
+		<tr id="MainEquipmentCategoryGroup">
+		  	 <td ><div id="EquipmentCategoryGroup"></div></td>
+		</tr>
+		<tr id="MainEquipmentCategory">
+		  	 <td ><div id="EquipmentCategory"></div></td>
+		</tr>
+		<tr id="MainEquipment">
+		  	 <td ><div id="Equipment" style=" visibility:collapse"></div></td>
+		</tr>
+		<tr>
+             <td><div id="Quantity"><span>Quantity<span id="Q4254_help"><span title="RequiredFieldValidator">*&nbsp;</span></span></span></div>
+			 <input id="Q4254" maxlength="10" name="Q4254" title="Maximum of 4000 characters" type="number"/>
+          </td>
+		</tr>
+		<tr class="dateinline">
+          <td><div id="Date"><span>Early Date<span id="Q4255_help"><span title="RequiredFieldValidator">*&nbsp;</span></span></span></div>
+            <table id="datefield-4155-triggerWrap" name="datefield-4155-triggerWrap" class="x-form-trigger-wrap" cellpadding="0" cellspacing="0" style="display: inline-block;width: 180px; table-layout: fixed;"><tbody><tr><td id="datefield-4155-inputCell" class="x-form-trigger-input-cell" style="width: 100%;"><input id="datefield-4155-inputEl" type="date" size="1" name="Q4255" style="width:100%;" class="x-form-field x-form-text " autocomplete="off" aria-invalid="false" data-errorqtip=""></td><td valign="top" class="x-trigger-cell" style="width:17px" id="ext-gen7046"><div class="x-trigger-index-0 x-form-trigger x-form-date-trigger x-form-trigger-last x-unselectable x-form-trigger-over x-form-date-trigger-over" role="button" id="ext-gen7045"></div></td></tr></tbody></table></td>
+       	</tr>
+        <tr class="dateinline dateleftmove">
+           <td><div id="Date-2"><span>Required By Date<span id="Q4255_help"><span title="RequiredFieldValidator">*&nbsp;</span></span></span></div>
+            <table id="datefield-4155-triggerWrap-2" name="datefield-4155-triggerWrap" class="x-form-trigger-wrap" cellpadding="0" cellspacing="0" style="display: inline-block;width: 180px; table-layout: fixed;"><tbody><tr><td id="datefield-4155-inputCell-2" class="x-form-trigger-input-cell" style="width: 100%;"><input id="datefield-4155-inputEl-2" type="date" size="1" name="Q4255-2" style="width:100%;" class="x-form-field x-form-text " autocomplete="off" aria-invalid="false" data-errorqtip=""></td><td valign="top" class="x-trigger-cell" style="width:17px" id="ext-gen7046-2"><div class="x-trigger-index-0 x-form-trigger x-form-date-trigger x-form-trigger-last x-unselectable x-form-trigger-over x-form-date-trigger-over" role="button" id="ext-gen7045-2"></div></td></tr></tbody></table></td>
+     	</tr>
+
+		<tr>
+             <td><span>Special Request Notes&nbsp;</span>
+			 <textarea cols="85" id="Q4256" maxlength="4000" name="Q4256" rows="1" width=100% title="Maximum of 4000 characters"></textarea></td>
+		</tr>
+                 
+		<tr>
+			<td><span>Add more rental items? * <span id="Q4257_help"><span title="RequiredFieldValidator"></span></span></span>
+			     <input id="Q4257_1" name="Q4257" type="radio" value="Yes" /><span id="Q4257">Yes</span>
+			     <input id="Q4257_2" name="Q4257" type="radio" value="No" checked="checked" /><span id="Q4257">No</span></td>
+		</tr>
+
+         <tr>
+			<td ><i>An asterisk (*) indicates a required field</i>
+              <br>
+              <br>
+           <div id="ValidationErrors" style="font:Cambria, 'Hoefler Text', 'Liberation Serif', Times, 'Times New Roman', serif; color:rgba(255,0,0,1.00); font-style: oblique"></div>
+              </td>
+		</tr>
+	
+
+	</tbody>
+</table>
+
+           <!-- Extra Line in UI -->
+           <br/>
+           
+  <footer >
+    <!--<P>&nbsp</P> -->
+   
+      <center><input type="submit" value="Next"  onClick="return EquipmentValidation();"/></center>
+    
+  </footer>     	
+    
+
+     
+     <!-- Extra Line in UI -->
+           <br/>
+           <br/>
+           <br/>
+     
+  	</div>
+    </form>
+  	<script src="https://jaitechsystems.github.io/js/scrollFix.js"></script>
+	<script>
+      // This example displays an address form, using the autocomplete feature
+      // of the Google Places API to help users fill in the information.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      var placeSearch, autocomplete;
+      var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+      };
+
+      function initAutocomplete() {
+        // Create the autocomplete object, restricting the search to geographical
+        // location types.
+        autocomplete = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+            {types: ['geocode']});
+
+        // When the user selects an address from the dropdown, populate the address
+        // fields in the form.
+        autocomplete.addListener('place_changed', fillInAddress);
+      }
+
+      function fillInAddress() {
+        // Get the place details from the autocomplete object.
+        var place = autocomplete.getPlace();
+
+        for (var component in componentForm) {
+          document.getElementById(component).value = '';
+          document.getElementById(component).disabled = false;
+        }
+
+        // Get each component of the address from the place details
+        // and fill the corresponding field on the form.
+        for (var i = 0; i < place.address_components.length; i++) {
+          var addressType = place.address_components[i].types[0];
+          if (componentForm[addressType]) {
+            var val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(addressType).value = val;
+          }
+        }
+		document.getElementById("Q4224_addr").value = document.getElementById("street_number").value + " " + document.getElementById("route").value;
+		document.getElementById("Q4224_city").value = document.getElementById("locality").value;
+		document.getElementById("Q4224_state").value = document.getElementById("administrative_area_level_1").value;
+		document.getElementById("Q4224_zip").value = document.getElementById("postal_code").value;
+      }
+
+      // Bias the autocomplete object to the user's geographical location,
+      // as supplied by the browser's 'navigator.geolocation' object.
+      function geolocate() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var geolocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var circle = new google.maps.Circle({
+              center: geolocation,
+              radius: position.coords.accuracy
+            });
+            autocomplete.setBounds(circle.getBounds());
+          });
+        }
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq5y2B9Bx7h-1tmzayCn5rar0BLuicbX4&libraries=places&callback=initAutocomplete" async defer></script>  
+</body>
+</html>
