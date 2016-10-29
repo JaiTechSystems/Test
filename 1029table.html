@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://workflow.waynebrothers.com/_JaiTech_CustomPlugins/js/Config.js"></script>
+  <script src="https://workflow.waynebrothers.com/_JaiTech_CustomPlugins/js/Gridv2.js"></script>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  
+  <script type="text/javascript">
+    //checkloadjscssfile("jquery/jquery-1.7.1.min.js","js");
+    checkloadjscssfile("underscore/underscore-min.js","js");
+    
+    var csv = false;
+    onload = function() 
+      {
+        
+        //e9a0ffb6-6b2a-4afd-9bf7-01a165e1d31d
+        // gridContent("84cb06a0-cdc0-4811-95f5-a624d7c5d37f","GridList" );
+        var searchValue = $("input[name='requestid']").val();
+        var r = gridContent("e9a0ffb6-6b2a-4afd-9bf7-01a165e1d31d","GridList", "report1", "@Request_ID",  searchValue);
+
+        $('input[name=CSV]').click(function (){
+            console.log(csv);
+          	console.log("check if csv");
+	    	if (this.id == "CSV_1")
+            {
+              csv = true;
+              console.log("yes = " + csv);
+            } else {
+		    	csv = false;
+              	console.log("no = " + csv);
+            }
+         });
+        
+      }
+      
+  
+  </script>
+  <script type="text/javascript">
+    
+    // Create the XHR object.
+    function createCORSRequest(method, url) {
+      var xhr = new XMLHttpRequest();
+      if ("withCredentials" in xhr) {
+        // XHR for Chrome/Firefox/Opera/Safari.
+        xhr.open(method, url, true);
+      } else if (typeof XDomainRequest != "undefined") {
+        // XDomainRequest for IE.
+        xhr = new XDomainRequest();
+        xhr.open(method, url);
+      } else {
+        // CORS not supported.
+        xhr = null;
+      }
+      return xhr;
+    }
+    
+    // Helper method to parse the title tag from the response.
+    function getTitle(text) {
+      return text.match('<title>(.*)?</title>');
+    }
+    
+    var returnFlag = false;
+    
+    function GenerateCSV(){
+      console.log("csv = " + csv);
+      if(csv && !returnFlag){
+        $( "#actiontype" ).val("finish")
+        var url = "https://analytics.waynebrothers.com/php/createCSV.php?RequestID=" + $("input[name='requestid']").val();
+        var xhr = createCORSRequest('POST', url);
+        console.log(url);
+        if (!xhr) {
+          alert('CORS not supported');
+          console.log("CORS not supported");
+          returnFlag = false;
+        }
+      
+        // Response handlers.
+        xhr.onload = function() {
+          //alert('Response from CORS request to');
+          console.log("Response from CORS request to");
+          returnFlag = true;
+          document.forms["DisplaySummary"].submit();   
+          
+        };
+      
+        xhr.onerror = function() {
+          alert('Woops, there was an error making the request.');
+          console.log("Woops, there was an error making the request.");
+          returnFlag = true;
+        };
+      
+        xhr.send();
+        console.log("End");
+        return false
+      }else{
+      	return true;
+      }
+
+    }
+
+    function sendSQL(sql){
+      var url = "https://analytics.waynebrothers.com/php/freeSQL.php?sql="+sql;
+      var xhr = createCORSRequest('POST', url);
+      if (!xhr) {
+        alert('CORS not supported');
+        return;
+      }
+    
+      // Response handlers.
+      xhr.onload = function() {
+        var text = xhr.responseText;
+        var title = getTitle(text);
+        var searchValue = $("input[name='requestid']").val();
+        gridContent("e9a0ffb6-6b2a-4afd-9bf7-01a165e1d31d","GridList", "report1", "@Request_ID",  searchValue);
+
+        //alert('Response from CORS request to ' + sql + ': ' + title);
+      };
+    
+      xhr.onerror = function() {
+        alert('Woops, there was an error making the request.');
+      };
+    
+      xhr.send();
+    }
+
+    function Delete(btn){
+      var message = confirm("Are you sure you want to delete this item? ");
+      //Detectamos si el usuario acepto el mensaje
+      if (message) {
+        $( "#GridList" ).empty()
+        sendSQL("DELETE FROM [integrify].[Request_Material_Order_Item] WHERE ID = " + btn);
+        
+        //var row = btn.parentNode.parentNode;
+        //row.parentNode.removeChild(row);	
+      }
+      //Detectamos si el usuario denegó el mensaje
+    }
+           
+    function Update(requestid, rowid, type){
+      //console.log(reportid);
+      //console.log(requestid);
+      //console.log(rowid);
+      //console.log(type);
+      
+      //$( "#actiontype" ).val("update")
+      // if(type == 1){
+      //	$( "#requesttype" ).val("Consumable")
+      // }else{
+      // 	$( "#requesttype" ).val("Equipment")
+      //}
+      //$( "#rowid" ).val(rowid)
+      //   csv = false;
+      //document.forms["DisplaySummary"].submit();        
+    }
+
+    function Add(){
+        $( "#actiontype" ).val("insert")
+          csv = false;
+		document.forms["DisplaySummary"].submit();        
+    }
+  </script>  <!--<link rel="stylesheet" type="text/css" href="https://workflow.waynebrothers.com/_JaiTech_CustomPlugins/js/reporttable.css">-->
+  
+  <style>
+       body {
+           background-color: white;
+   }
+    
+    table
+    {
+      border-collapse: collapse;
+      background: none;
+    }
+    
+    tr
+    {
+      border-collapse: collapse;
+      border:none;
+    }
+    
+    th
+    {
+      background: #F7F7F7;
+      font-family: sans-serif;
+      border: 1px solid #ddd;
+      margin: 0;
+      padding: 2px 6px;
+      border-spacing: 0;
+      border-collapse: collapse;
+      font-size: 10px;
+	font-weight: normal;
+    }
+    
+    td
+    {
+      background: #FFF;
+      margin: 0;
+      padding: 2px 6px;
+
+      font-family: sans-serif;
+      border-spacing: 0;
+      border-collapse: collapse;  
+      font-size: 10px;
+    }
+    
+	td
+    {
+      border: 1px solid #ddd;
+    }
+    
+    .prev,.page,.next
+    {
+      display: inline-block;
+      padding: 2px 5px;
+    }
+    
+    input[type="submit"],.button
+    {
+      width: 75px;
+      background: #9ba941;
+      font-family: sans-serif;
+      color: white;
+      border: 1px solid #c9d57b;
+      padding: 4px 8px;
+      height: auto;
+      border-radius: 0px !important;
+      font-size: 0.65em;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+    
+    .button
+    {
+      width: 150px;
+      font-size: 1em;
+      float: left;
+    }
+    
+    div.move_right
+    {
+      float: right;
+    }
+    
+    .clear
+    {
+      clear: both;
+    }
+    
+     footer{
+    	width: 100%;
+    	background: #e0e3e6;
+    	padding: 3px 0px;
+        position: fixed;
+    	bottom: 0;
+     }
+    
+    .container
+    {
+      position: relative;
+      min-height: 300px !important; 
+    }
+    
+    
+    @media screen and (max-width: 800px) {
+      
+      .small_font
+    {
+      font-size: 12px !important;
+      font-family: sans-serif;
+    }
+      
+      input[type='submit'],.button {
+        width: 95%;
+        max-width: 350px;
+        background: #3498db;
+        border: 1px solid #2980b9;
+        padding: 10px 30px;
+        font-size: 1em;
+      }
+      
+      .button{
+        position: relative;
+        left: 0px;
+        width: 140px;
+        }
+      
+      input[type='submit']
+      {
+        position: relative;
+        left: 0px;
+
+      }
+      
+    
+    footer{
+            background: none;
+            position: relative !important;
+            bottom: 0;
+            width: 100%;
+          }
+      
+    }
+    
+  </style>  
+  <header align="left">
+    <h1>Request Review</h1>
+  </header>
+  
+  <body>
+  <!-- <div class="container">    -->
+    <div class="containermain container">
+    
+    
+    <center><button class="button" onclick="Add();" > Add item</button> </center>
+  	
+    <div>    
+    <br>
+    <div>&nbsp</div>
+    <br>
+    <div>
+    <!--<div class="containermain"> -->
+    <table border="0" class="iForm" id="iForm" > <!-- align="center"> -->
+      <tr>
+        <td valign="middle" colspan="2">
+		   	
+            
+        </td>
+      </tr>
+      <div class="clear"></div>
+	  <tbody>
+		<tr class="clsDeviceSelection" id="DeviceListRow">
+		  <td align="left" colspan="2">
+            <div id="GridList">
+            </div>
+          </td>
+	    </tr>
+	  </tbody>
+    </table>
+    </div>
+   <br>
+     <!-- <div class="move_right"> -->
+    <div class="small_font">
+      <span>Create item csv file for upload&nbsp</span>
+    			<input id="CSV_1" name="CSV" type="radio" value="Yes"/>
+    			<span>Yes</span> 
+    			<input checked="checked" id="CSV_2" name="CSV" type="radio" value="No"/>
+    			<span>No</span>     
+          	</div>
+   <br>
+   </div>
+   <footer align="left">
+    <form action="#" method="post" id="DisplaySummary"> 
+      <input name="actiontype" id="actiontype" value="" type="hidden"/>
+      <input name="requesttype" id="requesttype" type="hidden"/>
+      <input name="requestid" id="requestid" type="hidden"/>
+      <input name="reportid" id="reportid" value="e9a0ffb6-6b2a-4afd-9bf7-01a165e1d31d" type="hidden"/>
+      <input name="rowid" id="rowid" type="hidden"/>
+      <center><input type="Submit" value="Place Order" onClick="return GenerateCSV();"/></center>
+    </form>
+  </footer>
+    <br><br><br><br><br><br>
+    </div>
+  </body>
+  <script id="IntegrifyForm"></script>
+  <script>
+    $(function(){
+      $("input[name='requestid']").val(IntegrifyForm.prefills.request_ID);
+      $("input[name='requesttype']").val(IntegrifyForm.prefills.Request_Type);
+    });
+    
+    function test(){
+      	console.log($("#actiontype").val());
+    	return false;
+    }
+  </script>
+  
+  <script src="https://jaitechsystems.github.io/js/scrollFixHorizontal.js"></script>
+  <script src="https://jaitechsystems.github.io/js/scrollFix.js"></script>
+  
+</html>
